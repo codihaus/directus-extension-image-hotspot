@@ -134,8 +134,8 @@ async function addHotSpot(e) {
 	const height = hotspotOverlay.value?.offsetHeight
 	const width = hotspotOverlay.value?.offsetWidth
 	const hotspot = { x: relativeX / width * 100, y: relativeY / height * 100 }
-	points.value = model.value?.points
-	points.value.push(hotspot)
+	points.value = model.value?.points || []
+	points.value?.push(hotspot)
 	formValue.value = {
 		index: (points.value?.length - 1),
 		...hotspot
@@ -159,7 +159,7 @@ function onSave(data) {
 }
 
 async function onClickPoint(item, index) {
-	points.value = model.value?.points
+	points.value = model.value?.points || []
 	formValue.value = {
 		...item, 
 		index
