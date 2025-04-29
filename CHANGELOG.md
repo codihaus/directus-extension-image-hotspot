@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.1.1
+
+[compare changes](https://github.com/codihaus/directus-extension-image-hotspot/compare/v1.1.0...v1.1.1)
+
+### 🩹 Fixes
+
+- Empty image ([156068e](https://github.com/codihaus/directus-extension-image-hotspot/commit/156068e))
+- Point value ([4b7c052](https://github.com/codihaus/directus-extension-image-hotspot/commit/4b7c052))
+
+### ❤️ Contributors
+
+- KhanhTD <khanh.ta@codihaus.com>
+
 ## v1.1.0
 
 
