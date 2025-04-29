@@ -10,31 +10,39 @@
 		</v-tabs>
 		<v-tabs-items v-model="currentTab" class="hotspot-tabs-content">
 			<v-tab-item>
-				<div class="hotspot-box">
-					<v-image
-						:src="`/assets/${value?.image}`"
-						class="hotspot-image"
-						role="presentation"
-					/>
-					<div ref="hotspotOverlay" class="hotspot-overlay" @click.stop.prevent="addHotSpot"></div>
-					<div class="hotspot-points">
-						<point
-							v-for="item, index in model?.points"
-							:point="item"
-							:key="`point-${index}`"
-							:marker="value?.marker"
-							@click="onClickPoint(item, index)"
-							@remove="model.points?.splice(index, 1)"
+				<template v-if="value?.image">
+					<div class="hotspot-box">
+						<v-image
+							:src="`/assets/${value?.image}`"
+							class="hotspot-image"
+							role="presentation"
 						/>
+						<div ref="hotspotOverlay" class="hotspot-overlay" @click.stop.prevent="addHotSpot"></div>
+						<div class="hotspot-points">
+							<point
+								v-for="item, index in model?.points"
+								:point="item"
+								:key="`point-${index}`"
+								:marker="value?.marker"
+								@click="onClickPoint(item, index)"
+								@remove="model.points?.splice(index, 1)"
+							/>
+						</div>
 					</div>
-				</div>
-				<div v-show="showForm" ref="formRef"class="hotspot-form">
-					<v-form
-						v-model="formValue"
-						:initial-values="{}"
-						:fields="fields"
-					/>
-					<v-button @click="onSave(formValue)">Save</v-button>
+					<div v-show="showForm" ref="formRef"class="hotspot-form">
+						<v-form
+							v-model="formValue"
+							:initial-values="{}"
+							:fields="fields"
+						/>
+						<v-button @click="onSave(formValue)">Save</v-button>
+					</div>
+				</template>
+				<div v-else class="hotspot-image-not-found">
+					<v-info icon="upload" title="Upload an image to continue" type="info">
+						Please upload an image on settings page!
+						<v-button @click="currentTab = [1]">Go to settings</v-button>
+					</v-info>
 				</div>
 			</v-tab-item>
 			<v-tab-item>
@@ -233,6 +241,15 @@ function onInputMarkerHeight(height) {
 
 .hotspot-image {
 	max-width: 100%;
+}
+
+.hotspot-image-not-found {
+	padding: 20px;
+	border-radius: 10px;
+	border: 1px solid #e4eaf1;
+}
+.hotspot-image-not-found .v-button {
+	margin-top: 24px;
 }
 
 .hotspot-form {
