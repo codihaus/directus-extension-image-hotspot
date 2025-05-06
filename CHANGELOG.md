@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.0
+
+[compare changes](https://github.com/codihaus/directus-extension-image-hotspot/compare/v1.1.1...v1.2.0)
+
+### 🚀 Enhancements
+
+- Drag to change position ([bd38600](https://github.com/codihaus/directus-extension-image-hotspot/commit/bd38600))
+
+### ❤️ Contributors
+
+- KhanhTD <khanh.ta@codihaus.com>
+
 ## v1.1.1
 
 [compare changes](https://github.com/codihaus/directus-extension-image-hotspot/compare/v1.1.0...v1.1.1)
