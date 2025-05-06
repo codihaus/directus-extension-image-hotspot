@@ -11,20 +11,22 @@
 		<v-tabs-items v-model="currentTab" class="hotspot-tabs-content">
 			<v-tab-item>
 				<template v-if="value?.image">
-					<div class="hotspot-box">
+					<div ref="hotspotBox" class="hotspot-box">
 						<v-image
 							:src="`/assets/${value?.image}`"
 							class="hotspot-image"
 							role="presentation"
 						/>
 						<div ref="hotspotOverlay" class="hotspot-overlay" @click.stop.prevent="addHotSpot"></div>
-						<div class="hotspot-points">
+						<div v-if="hotspotBox" class="hotspot-points">
 							<point
 								v-for="item, index in model?.points"
 								:point="item"
 								:key="`point-${index}`"
 								:marker="value?.marker"
-								@click="onClickPoint(item, index)"
+								:container="hotspotBox"
+								:active="selectedPoint === index"
+								@select="onClickPoint(item, index)"
 								@remove="model.points?.splice(index, 1)"
 							/>
 						</div>
@@ -100,8 +102,10 @@ onMounted(async() => {
 	}, 2000)
 })
 
+const hotspotBox = ref()
 const hotspotOverlay = ref()
 const formRef = ref()
+const selectedPoint = ref()
 
 const formValue = ref({})
 
@@ -144,6 +148,7 @@ async function addHotSpot(e) {
 		...model.value,
 		points: points.value
 	}
+	selectedPoint.value = formValue.value.index
 	showForm.value = true
 	isNew.value = true
 	await nextTick()
@@ -156,6 +161,9 @@ function onSave(data) {
 		...model.value,
 		points: points.value
 	}
+	if( isNew.value ) {
+		formValue.value = {}
+	}
 }
 
 async function onClickPoint(item, index) {
@@ -166,6 +174,7 @@ async function onClickPoint(item, index) {
 	};
 	showForm.value = true
 	isNew.value = false
+	selectedPoint.value = index
 	await nextTick()
 	formRef.value?.scrollIntoView({behavior: 'smooth'})
 }
