@@ -28,6 +28,7 @@
 								:active="selectedPoint === index"
 								@select="onClickPoint(item, index)"
 								@remove="model.points?.splice(index, 1)"
+								@update="model.points[index] = $event"
 							/>
 						</div>
 					</div>

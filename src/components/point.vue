@@ -32,7 +32,7 @@ const props = withDefaults(defineProps<{
 
 const { container } = toRefs(props)
 
-const emit = defineEmits(['select', 'remove'])
+const emit = defineEmits(['select', 'remove', 'update'])
 
 const dragRef = ref()
 
@@ -49,6 +49,10 @@ const { x, y, style } = useDraggable(dragRef, {
         setTimeout(() => {
             isDragging.value = false
         }, 0)
+        emit('update', {
+            x: x.value / container.value?.offsetWidth * 100,
+            y: y.value / container.value?.offsetHeight * 100,
+        })
     },
     onMove: (event) => {
         isDragging.value = true
