@@ -10,15 +10,16 @@
 		</v-tabs>
 		<v-tabs-items v-model="currentTab" class="hotspot-tabs-content">
 			<v-tab-item>
-				<template v-if="value?.image">
+				<div v-show="value?.image">
 					<div ref="hotspotBox" class="hotspot-box">
-						<v-image
+						<img
+							ref="imgRef"
 							:src="`/assets/${value?.image}`"
 							class="hotspot-image"
 							role="presentation"
 						/>
 						<div ref="hotspotOverlay" class="hotspot-overlay" @click.stop.prevent="addHotSpot"></div>
-						<div v-if="hotspotBox" class="hotspot-points">
+						<div v-if="hotspotBox && isLoaded" class="hotspot-points">
 							<point
 								v-for="item, index in model?.points"
 								:point="item"
@@ -27,8 +28,8 @@
 								:container="hotspotBox"
 								:active="selectedPoint === index"
 								@select="onClickPoint(item, index)"
-								@remove="model.points?.splice(index, 1)"
-								@update="model.points[index] = $event"
+								@remove="onRemovePoint(index)"
+								@update="onUpdatePoint($event, index)"
 							/>
 						</div>
 					</div>
@@ -40,8 +41,8 @@
 						/>
 						<v-button @click="onSave(formValue)">Save</v-button>
 					</div>
-				</template>
-				<div v-else class="hotspot-image-not-found">
+				</div>
+				<div v-if="!value?.image" class="hotspot-image-not-found">
 					<v-info icon="upload" title="Upload an image to continue" type="info">
 						Please upload an image on settings page!
 						<v-button @click="currentTab = [1]">Go to settings</v-button>
@@ -77,6 +78,7 @@ import { computed, defineComponent, nextTick, onMounted, ref } from 'vue';
 import Point from './components/point.vue'
 import uploader from './components/uploader.vue'
 import { set } from 'lodash-es'
+import { useImageLoaded } from './composables/use-image-loaded';
 
 const props = withDefaults(defineProps<{
 	value: JSON | null;
@@ -94,6 +96,10 @@ const model = computed({
 });
 
 const currentTab = ref([0])
+
+const imgRef = ref(null)
+const isLoaded = useImageLoaded(imgRef)
+
 
 onMounted(async() => {
 	setTimeout(() => {
@@ -212,6 +218,22 @@ function onInputMarkerHeight(height) {
 	}
 }
 
+function onRemovePoint(index) {
+	points.value = model.value?.points || []
+	points.value?.splice(index, 1)
+	model.value = {
+		...model.value,
+		points: points.value
+	}
+}
+
+function onUpdatePoint(point, index) {
+	points.value = model.value?.points || []
+	onSave({
+		...point,
+		index
+	})
+}
 </script>
 <style scoped>
 .v-tabs.hotspot-tabs :deep(.v-tab) {
@@ -239,6 +261,7 @@ function onInputMarkerHeight(height) {
 }
 
 .hotspot-box {
+	display: inline-block;
 	position: relative;
 	border: 1px solid #e4eaf1;
 }

@@ -72,7 +72,10 @@ const coordinate = computed(() => {
     }
 
     if( loaded.value ) {
-        output = style.value
+        output = {
+            top: y.value / container.value?.offsetHeight * 100,
+            left: x.value / container.value?.offsetWidth * 100,
+        }
     }
 
     return output
