@@ -2,7 +2,7 @@
 	"name": "directus-extension-image-hotspot",
 	"description": " A interface to pin hotspots to image",
 	"icon": "extension",
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"author": {
 		"email": "contact@codihaus.com",
 		"name": "Codihaus"

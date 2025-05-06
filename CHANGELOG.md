@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.3
+
+[compare changes](https://github.com/codihaus/directus-extension-image-hotspot/compare/v1.2.2...v1.2.3)
+
+### 🩹 Fixes
+
+- Drag point ([94a3b35](https://github.com/codihaus/directus-extension-image-hotspot/commit/94a3b35))
+
+### ❤️ Contributors
+
+- KhanhTD <khanh.ta@codihaus.com>
+
 ## v1.2.2
 
 [compare changes](https://github.com/codihaus/directus-extension-image-hotspot/compare/v1.2.1...v1.2.2)
