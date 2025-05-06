@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.2
+
+[compare changes](https://github.com/codihaus/directus-extension-image-hotspot/compare/v1.2.1...v1.2.2)
+
+### 🩹 Fixes
+
+- Check image load before show point & use % for top, left ([6ca7817](https://github.com/codihaus/directus-extension-image-hotspot/commit/6ca7817))
+
+### ❤️ Contributors
+
+- KhanhTD <khanh.ta@codihaus.com>
+
 ## v1.2.1
 
 [compare changes](https://github.com/codihaus/directus-extension-image-hotspot/compare/v1.2.0...v1.2.1)
