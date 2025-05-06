@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.1
+
+[compare changes](https://github.com/codihaus/directus-extension-image-hotspot/compare/v1.2.0...v1.2.1)
+
+### 🩹 Fixes
+
+- Update point on end drag ([2f2ee2e](https://github.com/codihaus/directus-extension-image-hotspot/commit/2f2ee2e))
+
+### ❤️ Contributors
+
+- KhanhTD <khanh.ta@codihaus.com>
+
 ## v1.2.0
 
 [compare changes](https://github.com/codihaus/directus-extension-image-hotspot/compare/v1.1.1...v1.2.0)
